@@ -3,7 +3,7 @@ import { compose } from 'recompose';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import { IRootState } from '../../reducers';
+import { IRootState } from 'reducers';
 import { find } from './actions';
 
 interface IProps extends StateProps, DispatchProps {

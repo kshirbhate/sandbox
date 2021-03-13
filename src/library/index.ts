@@ -13,5 +13,23 @@ import Quote from './Typography/Quote';
 import Small from './Typography/Small';
 import Success from './Typography/Success';
 import Warning from './Typography/Warning';
+import Loader from './Loader';
 
-export { FormField, PageContainer, PageHeader, Header, Button, SubscriberCode, SessionBox, Danger, Info, Muted, Primary, Quote, Small, Success, Warning };
+export {
+  FormField,
+  PageContainer,
+  PageHeader,
+  Header,
+  Button,
+  SubscriberCode,
+  SessionBox,
+  Danger,
+  Info,
+  Muted,
+  Primary,
+  Quote,
+  Small,
+  Success,
+  Warning,
+  Loader,
+};

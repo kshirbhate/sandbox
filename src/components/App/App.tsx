@@ -1,17 +1,14 @@
-import React from 'react';
-import { compose } from 'recompose';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
-import '@progress/kendo-theme-material/dist/all.css';
+import React, { useEffect } from 'react';
 import { Header } from 'library';
+import '@progress/kendo-theme-material/dist/all.css';
 import './index.scss';
+import { IProps } from './types';
 
-type AppProps = {
-  children?: React.ReactNode;
-};
+const App: React.FC<IProps> = (props) => {
+  useEffect(() => {
+    props.updateSessionOnRefresh();
+  }, []);
 
-const App: React.FC<AppProps> = (props) => {
   return (
     <div className="app-container">
       <Header brand="Officebox" color="primary" />
@@ -20,10 +17,4 @@ const App: React.FC<AppProps> = (props) => {
   );
 };
 
-const mapStateToProps = () => ({});
-
-const mapDispatchToProps = (dispatch: any) => bindActionCreators({}, dispatch);
-
-const enhance = compose(withRouter, connect(mapStateToProps, mapDispatchToProps));
-
-export default enhance(App);
+export default App;

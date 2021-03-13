@@ -1,8 +1,9 @@
 /* eslint-disable */
 import { CACHE_TYPES, Cache } from '../Cache/actions/types';
-
 import { completeAction, errorAction, startAction, getCacheData } from './utils';
+import { convertObRespose } from 'utils/fetch';
 import { isEmpty } from 'lodash';
+import { getAccessToken } from 'utils/localStorage';
 
 const actionType = (methodType: string, path: string) => `${methodType}_${path}`;
 
@@ -36,11 +37,14 @@ abstract class BaseRestClient {
     const headers = {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: '',
     };
     if (request.headers) Object.assign(headers, request.headers);
 
-    headers['Authorization'] = 'some token';
+    if (this.options.authHeader === undefined) {
+      headers['Access-Token'] = getAccessToken();
+    } else {
+      headers['Access-Token'] = this.options.authHeader;
+    }
 
     return {
       body: body ? JSON.stringify(body) : null,
@@ -62,44 +66,22 @@ abstract class BaseRestClient {
   }
 
   private convertResponse<T>(response: Response, transform?: (key: string, value: any) => any): Promise<T> {
-    switch (response.status) {
-      case -1:
-      case 503:
-      case 504:
-        throw {
-          status: response.status,
-          errors: [
-            {
-              message: 'An issue has occurred communicating with the server. Please try again later.',
-            },
-          ],
-        };
-      case 401:
-        throw { status: 401, errors: [{ message: 'Not Authorized' }] };
-      case 404:
-        throw { status: 404, errors: [{ message: 'Not Found' }] };
-    }
-
-    if (response.status >= 400) {
-      return response.text().then((body) => {
-        const errors = [];
-        try {
-          const json = JSON.parse(body);
-          (json.errors || []).forEach((error: any) => errors.push(error));
-          if (json.error) errors.push({ message: json.error });
-        } catch (e) {
-          throw {
-            status: response.status,
-            errors: [{ code: e.message, message: body }],
-          } as ErrorResponse;
-        }
-        throw { status: response.status, errors: errors };
-      });
-    }
-
     // @ts-ignore
     if (this.options.asBlob) return response.blob();
-    return response.text().then((body) => JSON.parse(body, transform));
+    return response.text().then((body) => {
+      const data = JSON.parse(body, transform);
+      if (data?.hasErrors || data?.ErrorCount > 0) {
+        let errors = [];
+        if (data?.hasErrors) {
+          errors.push(data?.message);
+        } else {
+          errors = data?.ErrorMessages;
+        }
+        throw errors;
+      } else {
+        return data;
+      }
+    });
   }
 }
 
@@ -213,14 +195,15 @@ export class AsyncRestClient extends BaseRestClient {
 
     this.fetch(url, request, transform)
       .then((data) => {
-        completeAction(type, data, params);
+        const convertedResponse = convertObRespose(data);
+        completeAction(type, convertedResponse, params);
         if (process.env.REACT_APP_CACHE_DATA === 'true') {
           completeAction(
             CACHE_TYPES.ADD,
             {
               type: type,
               name: url,
-              data: data,
+              data: convertedResponse,
               params: params,
             },
             {}

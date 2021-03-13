@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { Form } from '@progress/kendo-react-form';
 import DecoratedField from 'DecoratedField';
 import { PageContainer, FormField, Button, SessionBox, Loader } from 'library';
-import { useHistory } from 'react-router-dom';
 import { fields } from './fields';
 import { IProps } from './types';
 import { usePrevious } from 'hooks';
@@ -13,26 +12,24 @@ const mapFields = () => (field, i) => {
   return <DecoratedField key={i + field.name} {...field} inputcomponent={FormField} />;
 };
 
-const Login: React.FC<IProps> = (props) => {
+const Context: React.FC<IProps> = (props) => {
   const { loading, accessToken } = props;
   const prevLoading = usePrevious(props.loading);
-  const history = useHistory();
   useEffect(() => {
     if (!isEqual(prevLoading, loading) && prevLoading && !loading && accessToken) {
-      history.push('/context');
     }
   }, [loading]);
 
   return (
     <PageContainer>
-      <div className="login-container">
+      <div className="context-container">
         <Form
           onSubmit={props.handleSubmit}
           render={(formRenderProps) => (
-            <SessionBox title="Sign In">
+            <SessionBox title="Select Context">
               {fields.map(mapFields())}
               <Button size="sm" color="primary" disabled={!formRenderProps.allowSubmit} onClick={props.handleSubmit}>
-                Login
+                Next
               </Button>
             </SessionBox>
           )}
@@ -43,4 +40,4 @@ const Login: React.FC<IProps> = (props) => {
   );
 };
 
-export default Login;
+export default Context;
