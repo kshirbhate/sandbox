@@ -1,0 +1,23 @@
+.subscriber-code-container {
+  .k-textbox-container::after {
+    background-color: unset;
+  }
+
+  .subscriber-code {
+    width: 100%;
+    display: flex;
+
+    &-field {
+      width: 25%;
+      padding-right: 10px;
+
+      .k-textbox {
+        width: 100%;
+      }
+    }
+
+    &-field:last-child {
+      padding-right: 0;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+.session-box {
+  width: 400px;
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.1), 0 7px 12px -5px rgba(156, 39, 176, 0.4);
+
+  .box-title {
+    text-align: center;
+
+    h3 {
+      margin: 0;
+    }
+  }
+}

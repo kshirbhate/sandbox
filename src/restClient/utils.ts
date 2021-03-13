@@ -1,14 +1,6 @@
+import { differenceInMinutes } from 'date-fns';
+import { CACHE_TYPES, Cache } from '../Cache/actions/types';
 import store from '../store';
-
-export let dispatchAction = ({}: any): any => {};
-
-class DispatchAction {
-  public registerDispatch(dispatch: any) {
-    dispatchAction = dispatch;
-  }
-}
-
-export const DispatchActionService = new DispatchAction();
 
 export const OPERATIONS = {
   BEGINS: 'BEGINS',
@@ -45,3 +37,10 @@ export const isStarted = (operation) => operation === OPERATIONS.BEGINS;
 export const isCompleted = (operation) => operation === OPERATIONS.COMPLETE;
 
 export const isFailure = (operation) => operation === OPERATIONS.FAILURE;
+
+export const getCacheData = (name: string, type: string): Cache => {
+  const list = store.getState()?.cache?.list?.filter((cache) => differenceInMinutes(new Date(cache?.validTill), new Date()) >= 0);
+  completeAction(CACHE_TYPES.UPDATE_ALL, list, {});
+  const cache = list?.find((cache) => cache.name === name && cache.type === type);
+  return cache;
+};

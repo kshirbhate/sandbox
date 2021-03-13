@@ -16,9 +16,11 @@ const Home: React.FC<IProps> = (props) => {
   useEffect(() => {
     props.find();
   }, [props.find]);
+
   return (
     <div>
       <h1>Home</h1>
+      <h3 onClick={() => props.find()}>Refresh</h3>
       {props.loading && 'loading...'}
       {props.list && props.list.map((item, i) => <h4 key={i}>{item}</h4>)}
     </div>

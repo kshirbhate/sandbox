@@ -1,0 +1,8 @@
+.page-container {
+  padding: 10px 30px;
+  height: calc(100vh - 82px);
+
+  @media (max-width: '768px') {
+    padding: 10px;
+  }
+}

@@ -3,6 +3,8 @@ import { compose } from 'recompose';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import '@progress/kendo-theme-material/dist/all.css';
+import { Header } from 'library';
 import './index.scss';
 
 type AppProps = {
@@ -10,7 +12,12 @@ type AppProps = {
 };
 
 const App: React.FC<AppProps> = (props) => {
-  return <div className="app-container">{props.children}</div>;
+  return (
+    <div className="app-container">
+      <Header brand="Officebox" color="primary" />
+      <div>{props.children}</div>
+    </div>
+  );
 };
 
 const mapStateToProps = () => ({});

@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
 import store from './store';
 import reportWebVitals from './reportWebVitals';
+import 'assets/scss/material-kit-react.scss?v=1.9.0';
 
 ReactDOM.render(
   <Provider store={store}>

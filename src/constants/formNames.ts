@@ -1,0 +1,2 @@
+export const FEATURE_ENTITY_FORM = 'FEATURE_ENTITY_FORM';
+export const LOGIN_FORM = 'LOGIN_FORM';
