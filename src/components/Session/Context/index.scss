@@ -4,3 +4,14 @@
   justify-content: center;
   align-items: center;
 }
+
+.context-menus {
+  display: flex;
+  align-items: center;
+
+  &-item {
+    button {
+      padding: 12px 15px;
+    }
+  }
+}

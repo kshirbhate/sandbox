@@ -11,3 +11,9 @@ export const updateSessionOnRefresh = () => (dispatch) => {
     type: LOGIN_TYPES.UPDATE_SESSION_ON_REFRESH,
   });
 };
+
+export const logout = () => (dispatch) => {
+  dispatch({
+    type: LOGIN_TYPES.LOGOUT,
+  });
+};

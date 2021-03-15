@@ -1,7 +1,7 @@
 import { isNil } from 'lodash';
 import { isStarted, isCompleted, isFailure } from 'restClient/utils';
 import { convertToCamelCase } from 'utils/fetch';
-import { setAccessToken, getAccessToken, setSessionDetails, getSessionDetails } from 'utils/localStorage';
+import { setAccessToken, getAccessToken, setSessionDetails, getSessionDetails, removeSession } from 'utils/localStorage';
 import { LOGIN_TYPES } from 'components/Session/Login/types';
 
 const initialState = {
@@ -47,10 +47,21 @@ const updateSessionOnRefreshResult = (state) => {
   };
 };
 
+const logoutResult = (state) => {
+  removeSession();
+  return {
+    ...state,
+    session: {},
+    accessToken: '',
+  };
+};
+
 export default (state: SessionState = initialState, action): SessionState => {
   switch (action.type) {
     case LOGIN_TYPES.UPDATE_SESSION_ON_REFRESH:
       return updateSessionOnRefreshResult(state);
+    case LOGIN_TYPES.LOGOUT:
+      return logoutResult(state);
     case LOGIN_TYPES.LOGIN: {
       if (isStarted(action.operation)) {
         return start(state);

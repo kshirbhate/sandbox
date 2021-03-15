@@ -1,17 +1,31 @@
 export const fields = [
   {
-    label: 'Subscriber Code',
-    name: 'subscriberCode',
-    type: 'subscriberCode',
+    label: 'Company',
+    name: 'company',
+    type: 'combobox',
   },
   {
-    label: 'User Name',
-    name: 'userName',
-    type: 'email',
+    label: 'Region',
+    name: 'region',
+    type: 'combobox',
   },
   {
-    label: 'Password',
-    name: 'password',
-    type: 'password',
+    label: 'Branch',
+    name: 'branch',
+    type: 'combobox',
+  },
+  {
+    label: 'Unit',
+    name: 'unit',
+    type: 'combobox',
+  },
+  {
+    label: 'Financial Year',
+    name: 'financialYear',
+    type: 'combobox',
+  },
+  {
+    label: 'Name',
+    name: 'name',
   },
 ];

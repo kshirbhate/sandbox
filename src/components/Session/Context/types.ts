@@ -7,4 +7,12 @@ export interface IProps extends StateProps, DispatchProps {
     },
     event?: React.SyntheticEvent<any, Event>
   ) => void;
+  getContextHierarchy?: Function;
+  change?: Function;
+  dispatch?: any;
+  initialize?: Function;
 }
+
+export const CONTEXT_TYPES = {
+  GET_CONTEXT_HIERARCHY: 'GET_CONTEXT_HIERARCHY',
+};

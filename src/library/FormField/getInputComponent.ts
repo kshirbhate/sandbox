@@ -1,5 +1,5 @@
 import { Input, NumericTextBox } from '@progress/kendo-react-inputs';
-import { SubscriberCode } from 'library';
+import { SubscriberCode, ComboSelect } from 'library';
 
 export const getInputComponent = (inputType) => {
   switch (inputType) {
@@ -13,6 +13,8 @@ export const getInputComponent = (inputType) => {
       return NumericTextBox;
     case T.SUBSCRIBERCODE:
       return SubscriberCode;
+    case T.COMBOBOX:
+      return ComboSelect;
     default:
       return Input;
   }
@@ -24,4 +26,5 @@ export const T = {
   PASSWORD: 'password',
   NUMBER: 'number',
   SUBSCRIBERCODE: 'subscriberCode',
+  COMBOBOX: 'combobox',
 };

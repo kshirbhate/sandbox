@@ -14,6 +14,8 @@ import Small from './Typography/Small';
 import Success from './Typography/Success';
 import Warning from './Typography/Warning';
 import Loader from './Loader';
+import ComboSelect from './Select/ComboSelect';
+import CustomDropdown from './CustomDropdown/CustomDropdown';
 
 export {
   FormField,
@@ -32,4 +34,6 @@ export {
   Success,
   Warning,
   Loader,
+  ComboSelect,
+  CustomDropdown,
 };

@@ -20,6 +20,7 @@ module.exports = {
     'react/display-name': 'off',
     '@typescript-eslint/ban-ts-ignore': 'off',
     '@typescript-eslint/ban-ts-comment': 'off',
+    'react/react-in-jsx-scope': 'off',
   },
   settings: {
     react: {

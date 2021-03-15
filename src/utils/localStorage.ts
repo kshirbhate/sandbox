@@ -12,8 +12,9 @@ export const getAccessToken = () => {
   if (isNil(token)) {
     window.localStorage.removeItem(ACCESS_TOKEN);
     return '';
+  } else {
+    return token || '';
   }
-  return token;
 };
 
 export const setSessionDetails = (session) => {
@@ -27,4 +28,9 @@ export const getSessionDetails = () => {
     return null;
   }
   return session;
+};
+
+export const removeSession = () => {
+  window.localStorage.removeItem(SESSION_DETAILS);
+  window.localStorage.removeItem(ACCESS_TOKEN);
 };
