@@ -1,4 +1,4 @@
-const modalStyle = {
+const modalStyle: any = {
   modal: {
     borderRadius: '6px',
   },

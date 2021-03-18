@@ -11,7 +11,23 @@
 
   &-item {
     button {
-      padding: 12px 15px;
+      padding: 12px 8px;
+      margin: 0;
+    }
+  }
+}
+
+.context-modal-container {
+  .page-container {
+    padding: 0;
+    height: unset;
+
+    .context-container {
+      display: block;
+
+      .session-box {
+        box-shadow: unset;
+      }
     }
   }
 }

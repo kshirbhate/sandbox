@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { Form } from '@progress/kendo-react-form';
 import DecoratedField from 'DecoratedField';
 import { PageContainer, FormField, Button, SessionBox, Loader } from 'library';
 import { useHistory } from 'react-router-dom';
@@ -26,17 +25,14 @@ const Login: React.FC<IProps> = (props) => {
   return (
     <PageContainer>
       <div className="login-container">
-        <Form
-          onSubmit={props.handleSubmit}
-          render={(formRenderProps) => (
-            <SessionBox title="Sign In">
-              {fields.map(mapFields())}
-              <Button size="sm" color="primary" disabled={!formRenderProps.allowSubmit} onClick={props.handleSubmit}>
-                Login
-              </Button>
-            </SessionBox>
-          )}
-        />
+        <form onSubmit={props.handleSubmit}>
+          <SessionBox title="Sign In">
+            {fields.map(mapFields())}
+            <Button size="sm" color="primary" type="submit" disabled={loading}>
+              Login
+            </Button>
+          </SessionBox>
+        </form>
       </div>
       <Loader show={props.loading} />
     </PageContainer>

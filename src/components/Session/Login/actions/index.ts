@@ -17,3 +17,8 @@ export const logout = () => (dispatch) => {
     type: LOGIN_TYPES.LOGOUT,
   });
 };
+
+export const updateSessionContext = (data) => (dispatch) => {
+  const restClient = getAsyncRestClient(dispatch);
+  restClient.$post(`/eshop/session/UpdateContext`, data, LOGIN_TYPES.UPDATE_SESSION_CONTEXT);
+};

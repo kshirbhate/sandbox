@@ -16,6 +16,9 @@ import Warning from './Typography/Warning';
 import Loader from './Loader';
 import ComboSelect from './Select/ComboSelect';
 import CustomDropdown from './CustomDropdown/CustomDropdown';
+import CustomTabs from './CustomTabs/CustomTabs';
+import GridContainer from './Grid/GridContainer';
+import GridItem from './Grid/GridItem';
 
 export {
   FormField,
@@ -36,4 +39,7 @@ export {
   Loader,
   ComboSelect,
   CustomDropdown,
+  CustomTabs,
+  GridContainer,
+  GridItem,
 };

@@ -10,6 +10,7 @@ const initialState = {
   companyList: [],
   unitList: [],
   financialYearList: [],
+  showContextModal: false,
 };
 
 export type ContextState = Readonly<typeof initialState>;
@@ -90,8 +91,15 @@ const result = (state, action) => {
   };
 };
 
+const showContextModalResult = (state, action) => ({
+  ...state,
+  showContextModal: action.value,
+});
+
 export default (state: ContextState = initialState, action): ContextState => {
   switch (action.type) {
+    case CONTEXT_TYPES.SHOW_CONTEXT_MODAL:
+      return showContextModalResult(state, action);
     case CONTEXT_TYPES.GET_CONTEXT_HIERARCHY: {
       if (isStarted(action.operation)) {
         return start(state);

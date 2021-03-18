@@ -10,3 +10,7 @@ html {
 .app-container {
   height: 100vh;
 }
+
+.MuiDialog-root {
+  z-index: 100 !important;
+}

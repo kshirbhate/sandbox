@@ -1,3 +1,4 @@
+import { Primary } from 'library';
 import React from 'react';
 import './index.scss';
 
@@ -9,7 +10,9 @@ type PageHeaderProps = {
 const PageHeader: React.FC<PageHeaderProps> = (props) => (
   <div className="page-header">
     <div className="page-header-title">
-      <h2>{props.title}</h2>
+      <Primary>
+        <h3>{props.title}</h3>
+      </Primary>
     </div>
     {props.description && <div className="page-header-description">{props.description}</div>}
   </div>

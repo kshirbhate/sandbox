@@ -7,7 +7,7 @@ import { LOGIN_TYPES } from 'components/Session/Login/types';
 const initialState = {
   loading: false,
   errors: [],
-  session: {},
+  session: {} as any,
   accessToken: '',
 };
 
@@ -62,7 +62,8 @@ export default (state: SessionState = initialState, action): SessionState => {
       return updateSessionOnRefreshResult(state);
     case LOGIN_TYPES.LOGOUT:
       return logoutResult(state);
-    case LOGIN_TYPES.LOGIN: {
+    case LOGIN_TYPES.LOGIN:
+    case LOGIN_TYPES.UPDATE_SESSION_CONTEXT: {
       if (isStarted(action.operation)) {
         return start(state);
       } else if (isCompleted(action.operation)) {

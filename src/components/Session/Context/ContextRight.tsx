@@ -1,18 +1,22 @@
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Menu from './Menu';
 import { CustomDropdown } from 'library';
 import { logout } from 'components/Session/Login/actions';
+import { IRootState } from 'reducers';
+import { isEmpty, isNil } from 'lodash';
 
 const ContextRight = () => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const session: any = useSelector((state: IRootState) => state.session.session);
+  const cnnctnString = session?.dbpTrnsctnDtbse.cnnctnString;
 
   const onClick = (value) => {
     switch (value) {
       case 'home':
       case 'Help': {
-        history.push('/home');
+        history.push('/menu');
         return;
       }
       case 'Logout': {
@@ -21,7 +25,7 @@ const ContextRight = () => {
         return;
       }
       default: {
-        history.push('/home');
+        history.push('/menu');
         return;
       }
     }
@@ -29,9 +33,9 @@ const ContextRight = () => {
 
   return (
     <div className="context-menus">
-      <Menu label="Home" onClick={() => onClick('home')} />
+      {!isEmpty(cnnctnString) && !isNil(cnnctnString) && <Menu label="Home" onClick={() => onClick('home')} />}
       <CustomDropdown
-        buttonText="User Name"
+        buttonText={session?.crrntApplctnUser?.realName}
         buttonProps={{
           color: 'transparent',
         }}

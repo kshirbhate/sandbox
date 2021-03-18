@@ -16,7 +16,7 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-export default function GridContainer(props) {
+const GridContainer: React.FC<any> = (props) => {
   const classes = useStyles();
   const { children, className, ...rest } = props;
   return (
@@ -24,7 +24,7 @@ export default function GridContainer(props) {
       {children}
     </Grid>
   );
-}
+};
 
 GridContainer.defaultProps = {
   className: '',
@@ -34,3 +34,5 @@ GridContainer.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
 };
+
+export default GridContainer;

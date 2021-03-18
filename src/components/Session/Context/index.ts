@@ -5,9 +5,19 @@ import { reduxForm, initialize, change } from 'redux-form';
 import { CONTEXT_FORM } from 'constants/formNames';
 import { IRootState } from 'reducers';
 import Context from './Context';
-import { getContextHierarchy } from './actions';
+import { getContextHierarchy, setShowContextModal } from './actions';
+import { updateSessionContext } from '../Login/actions';
 
-const onSubmit = (_formData, _dispatch, _props) => {};
+const onSubmit = (formData, _dispatch, props) => {
+  const data = {
+    cmpnyId: formData.company?.value,
+    regionId: formData.region?.value,
+    branchId: formData.branch?.value,
+    unitId: formData.unit?.value,
+    fnnclYearId: formData.financialYear?.value,
+  };
+  props.updateSessionContext(data);
+};
 
 const form = {
   form: CONTEXT_FORM,
@@ -15,7 +25,8 @@ const form = {
 };
 
 const mapStateToProps = (state: IRootState) => ({
-  loading: state.session.loading || state.context.loading,
+  loading: state.session.loading,
+  contextLoading: state.context.loading,
   session: state.session.session,
   accessToken: state.session.accessToken,
   company: state.context.companyList,
@@ -31,6 +42,8 @@ const mapDispatchToProps = (dispatch: any) =>
       getContextHierarchy,
       change,
       initialize,
+      updateSessionContext,
+      setShowContextModal,
     },
     dispatch
   );

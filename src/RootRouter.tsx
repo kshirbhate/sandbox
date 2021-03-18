@@ -4,14 +4,13 @@ import App from './components/App';
 import { getAccessToken } from 'utils/localStorage';
 import { isEmpty } from 'lodash';
 
-const Home = lazy(() => import(/* webpackChunkName: "Home" */ './components/Home/Home'));
-const FeatureEntity = lazy(() => import(/* webpackChunkName: "FeatureEntity" */ './components/Feature/FeatureEntity'));
+const Menu = lazy(() => import(/* webpackChunkName: "Menu" */ './components/Menu'));
 const Login = lazy(() => import(/* webpackChunkName: "Login" */ './components/Session/Login'));
 const Context = lazy(() => import(/* webpackChunkName: "Context" */ './components/Session/Context'));
 
 const AuthRoute = ({ component: Component, ...rest }) => {
   const valid = !isEmpty(getAccessToken());
-  return <Route {...rest} render={(props) => (valid ? <Component {...props} /> : <Login />)} />;
+  return <Route {...rest} render={(props) => (valid ? rest.path === '/' ? <Menu {...props} /> : <Component {...props} /> : <Login />)} />;
 };
 
 const RootRouter = () => (
@@ -20,8 +19,7 @@ const RootRouter = () => (
       <Switch>
         <AuthRoute exact path={'/'} component={Login} />
         <AuthRoute exact path={'/context'} component={Context} />
-        <AuthRoute exact path={'/home'} component={Home} />
-        <AuthRoute exact path={'/feature-entity'} component={FeatureEntity} />
+        <AuthRoute exact path={'/menu'} component={Menu} />
         {/* This route should always be last */}
         <Route exact path={'*'} render={() => <Login />} />
       </Switch>

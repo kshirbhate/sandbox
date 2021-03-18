@@ -8,6 +8,7 @@ export interface IProps extends StateProps, DispatchProps {
     event?: React.SyntheticEvent<any, Event>
   ) => void;
   getContextHierarchy?: Function;
+  setShowContextModal?: Function;
   change?: Function;
   dispatch?: any;
   initialize?: Function;
@@ -15,4 +16,5 @@ export interface IProps extends StateProps, DispatchProps {
 
 export const CONTEXT_TYPES = {
   GET_CONTEXT_HIERARCHY: 'GET_CONTEXT_HIERARCHY',
+  SHOW_CONTEXT_MODAL: 'SHOW_CONTEXT_MODAL',
 };

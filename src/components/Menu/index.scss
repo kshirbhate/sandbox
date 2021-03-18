@@ -1,0 +1,70 @@
+.menu-container {
+  .card-header {
+    padding: 0;
+    background: white;
+
+    .MuiTab-root {
+      color: #9c27b0 !important;
+      margin-left: 0;
+    }
+
+    .Mui-selected {
+      color: white !important;
+      background-color: #9c27b0 !important;
+    }
+  }
+}
+
+.menu-contents {
+  a {
+    text-decoration: underline;
+  }
+
+  .menu-section {
+    padding: 0;
+    padding-right: 5px;
+
+    &-title {
+      h3 {
+        margin: 0;
+      }
+    }
+  }
+
+  .menu-section:last-child {
+    padding: 0;
+  }
+
+  .even-row {
+    background-color: white;
+  }
+
+  .odd-row {
+    background-color: rgba(156, 39, 176, 0.15);
+  }
+
+  .links-wrapper {
+    padding: 0;
+  }
+
+  .menu-item {
+    // display: flex;
+    // align-items: center;
+    font-family: Arial, Segoe UI, Arial, Verdana, Tahoma, sans-serif !important;
+    font-size: 12px;
+    color: black;
+    margin: 0;
+
+    &-name {
+      padding: 0;
+      padding-left: 2px;
+    }
+
+    &-link {
+      width: 20%;
+      padding: 0;
+      font-size: 11px;
+      text-decoration: underline;
+    }
+  }
+}

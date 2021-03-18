@@ -1,5 +1,4 @@
 import React from 'react';
-import { Field } from '@progress/kendo-react-form';
 import { getInputComponent } from './getInputComponent';
 import './index.scss';
 
@@ -10,7 +9,7 @@ const FormField = (props) => {
     props.onChange(e.value);
   };
 
-  return <Field component={Component} {...props} onChange={onChange} />;
+  return <Component {...props} onChange={onChange} onBlur={() => {}} />;
 };
 
 export default FormField;

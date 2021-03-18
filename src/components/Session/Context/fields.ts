@@ -24,8 +24,4 @@ export const fields = [
     name: 'financialYear',
     type: 'combobox',
   },
-  {
-    label: 'Name',
-    name: 'name',
-  },
 ];
