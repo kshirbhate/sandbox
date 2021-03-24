@@ -4,17 +4,17 @@ import './index.scss';
 
 type PageHeaderProps = {
   title?: string;
-  description?: string;
+  children?: React.ReactNode;
 };
 
-const PageHeader: React.FC<PageHeaderProps> = (props) => (
+const PageHeader: React.FC<PageHeaderProps> = ({ title, children }) => (
   <div className="page-header">
     <div className="page-header-title">
       <Primary>
-        <h3>{props.title}</h3>
+        <h3>{title}</h3>
       </Primary>
     </div>
-    {props.description && <div className="page-header-description">{props.description}</div>}
+    <div className="page-header-children">{children}</div>
   </div>
 );
 

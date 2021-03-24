@@ -1,0 +1,11 @@
+.filter-container {
+  display: flex;
+
+  .form-group {
+    margin-right: 10px;
+  }
+
+  .form-group:last-child {
+    margin-right: 0;
+  }
+}

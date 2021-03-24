@@ -1,16 +1,18 @@
+@import '../../assets/scss/material-kit-react.scss';
+
 .menu-container {
   .card-header {
     padding: 0;
     background: white;
 
     .MuiTab-root {
-      color: #9c27b0 !important;
+      color: $primary !important;
       margin-left: 0;
     }
 
     .Mui-selected {
       color: white !important;
-      background-color: #9c27b0 !important;
+      background-color: $primary !important;
     }
   }
 }
@@ -45,10 +47,12 @@
     }
 
     &-link {
-      width: 20%;
+      min-width: 10%;
+      width: max-content;
       padding: 0;
       font-size: 11px;
       text-decoration: underline;
+      padding-right: 5px;
     }
   }
 }

@@ -1,3 +1,4 @@
 export const FEATURE_ENTITY_FORM = 'FEATURE_ENTITY_FORM';
 export const LOGIN_FORM = 'LOGIN_FORM';
 export const CONTEXT_FORM = 'CONTEXT_FORM';
+export const FILTER_FORM = 'FILTER_FORM';

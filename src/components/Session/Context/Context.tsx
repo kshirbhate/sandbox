@@ -8,14 +8,6 @@ import './index.scss';
 import { isEmpty, isEqual } from 'lodash';
 import { useHistory } from 'react-router-dom';
 
-const initialValues = {
-  company: {},
-  region: {},
-  branch: {},
-  unit: {},
-  financialYear: {},
-};
-
 const mapFields = (props) => (field, i) => {
   const options = props[field.name];
   return (

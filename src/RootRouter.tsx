@@ -7,6 +7,9 @@ import { isEmpty } from 'lodash';
 const Menu = lazy(() => import(/* webpackChunkName: "Menu" */ './components/Menu'));
 const Login = lazy(() => import(/* webpackChunkName: "Login" */ './components/Session/Login'));
 const Context = lazy(() => import(/* webpackChunkName: "Context" */ './components/Session/Context'));
+const PurchaseInvoiceGstList = lazy(
+  () => import(/* webpackChunkName: "PurchaseInvoiceGstList" */ './components/Purchase/Transactions/PurchaseInvoiceGst/List')
+);
 
 const AuthRoute = ({ component: Component, ...rest }) => {
   const valid = !isEmpty(getAccessToken());
@@ -20,6 +23,7 @@ const RootRouter = () => (
         <AuthRoute exact path={'/'} component={Login} />
         <AuthRoute exact path={'/context'} component={Context} />
         <AuthRoute exact path={'/menu'} component={Menu} />
+        <AuthRoute exact path={'/purchase-invoice-gst/list'} component={PurchaseInvoiceGstList} />
         {/* This route should always be last */}
         <Route exact path={'*'} render={() => <Login />} />
       </Switch>

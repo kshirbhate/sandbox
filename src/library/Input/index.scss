@@ -21,3 +21,23 @@
     }
   }
 }
+
+.from-to-date-picker {
+  display: flex;
+
+  @media (max-width: '768px') {
+    display: block;
+    .form-group-field {
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
+  }
+
+  .form-group-field {
+    margin-right: 10px;
+  }
+
+  .form-group-field:last-child {
+    margin-right: 0;
+  }
+}

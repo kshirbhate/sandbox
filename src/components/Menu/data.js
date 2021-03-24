@@ -106,6 +106,16 @@ export const menus = [
   {
     id: 2,
     name: 'Purchase',
+    transactions: [
+      {
+        menuItemDisplayName: 'Purchase Invoice(GST)',
+        menuItemURL: '',
+        actionDisplayName1: 'List',
+        actionURL1: '/purchase-invoice-gst/list',
+        actionDisplayName2: 'New',
+        actionURL2: '/menu',
+      },
+    ],
   },
   {
     id: 3,

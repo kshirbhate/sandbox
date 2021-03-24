@@ -1,12 +1,19 @@
 .page-header {
   margin-bottom: 10px;
+  display: flex;
+
+  @media (max-width: '768px') {
+    display: block;
+  }
 
   h3 {
     margin: 0;
   }
+
   &-title {
+    flex-grow: 1;
   }
 
-  &-description {
+  &-children {
   }
 }
