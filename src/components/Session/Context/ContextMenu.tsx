@@ -5,12 +5,15 @@ import './index.scss';
 import { isEmpty, isNil } from 'lodash';
 import ContextModal from './ContextModal';
 import { setShowContextModal } from './actions';
-import { CONTEXT_MODAL, getHandleKeys, KEY_HANDLERS } from 'constants/keyHandlers';
+import { setShowMenuModal } from 'components/Menu/actions';
+import { CONTEXT_MODAL, getMultiHandleKeys, KEY_HANDLERS, MENU_MODAL } from 'constants/keyHandlers';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
+import SearchMenuModal from 'components/Menu/SearchMenuModal';
 
 const ContextMenu = () => {
   const dispatch = useDispatch();
   const showContextModal = useSelector((state: IRootState) => state.context.showContextModal);
+  const showMenuModal = useSelector((state: IRootState) => state.menu.showMenuModal);
   const session: any = useSelector((state: IRootState) => state.session.session);
   const cnnctnString = session?.dbpTrnsctnDtbse.cnnctnString;
   if (isEmpty(cnnctnString) || isNil(cnnctnString)) {
@@ -25,12 +28,24 @@ const ContextMenu = () => {
     dispatch(setShowContextModal(false));
   };
 
+  const openMenuModal = () => {
+    dispatch(setShowMenuModal(true));
+  };
+
+  const onCloseMenuModal = () => {
+    dispatch(setShowMenuModal(false));
+  };
+
   const onKeyEvent = (key, e) => {
     e.preventDefault();
     if (key === KEY_HANDLERS.CONTEXT_MODAL.open_modal) {
       onClick();
+    } else if (key === KEY_HANDLERS.MENU_MODAL.open_modal) {
+      openMenuModal();
     }
   };
+
+  const handleKeys = getMultiHandleKeys([CONTEXT_MODAL, MENU_MODAL]);
 
   return (
     <div className="context-menus">
@@ -40,8 +55,9 @@ const ContextMenu = () => {
       <Menu label={session?.crrntCmpnyUnit?.title} onClick={onClick} />
       <Menu label={session?.crrntFnnclYear?.title} onClick={onClick} />
       {showContextModal && <ContextModal show={showContextModal} onClose={onClose} />}
+      {showMenuModal && <SearchMenuModal show={showMenuModal} onClose={onCloseMenuModal} />}
 
-      <KeyboardEventHandler handleKeys={getHandleKeys(CONTEXT_MODAL)} onKeyEvent={onKeyEvent} />
+      <KeyboardEventHandler handleKeys={handleKeys} onKeyEvent={onKeyEvent} />
     </div>
   );
 };

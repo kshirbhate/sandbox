@@ -8,3 +8,10 @@ export const getMenus = () => (dispatch) => {
     response,
   });
 };
+
+export const setShowMenuModal = (value) => (dispatch) => {
+  dispatch({
+    type: MENU_TYPES.SHOW_MENU_MODAL,
+    value,
+  });
+};

@@ -34,9 +34,9 @@ const modalStyle: any = {
     height: '16px',
   },
   modalBody: {
-    paddingTop: '24px',
+    paddingTop: '10px',
     paddingRight: '24px',
-    paddingBottom: '16px',
+    paddingBottom: '10px',
     paddingLeft: '24px',
     position: 'relative',
   },

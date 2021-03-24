@@ -19,6 +19,7 @@ import CustomDropdown from './CustomDropdown/CustomDropdown';
 import CustomTabs from './CustomTabs/CustomTabs';
 import GridContainer from './Grid/GridContainer';
 import GridItem from './Grid/GridItem';
+import Modal from './Modal';
 
 export {
   FormField,
@@ -42,4 +43,5 @@ export {
   CustomTabs,
   GridContainer,
   GridItem,
+  Modal,
 };

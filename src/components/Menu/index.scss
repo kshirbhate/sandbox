@@ -16,10 +16,6 @@
 }
 
 .menu-contents {
-  a {
-    text-decoration: underline;
-  }
-
   .menu-section {
     padding: 0;
     padding-right: 5px;
@@ -32,18 +28,6 @@
   }
 
   .menu-section:last-child {
-    padding: 0;
-  }
-
-  .even-row {
-    background-color: white;
-  }
-
-  .odd-row {
-    background-color: rgba(156, 39, 176, 0.15);
-  }
-
-  .links-wrapper {
     padding: 0;
   }
 
@@ -65,6 +49,55 @@
       padding: 0;
       font-size: 11px;
       text-decoration: underline;
+    }
+  }
+}
+
+a {
+  text-decoration: underline !important;
+}
+
+.links-wrapper {
+  padding: 0 !important;
+}
+
+.even-row {
+  background-color: white;
+}
+
+.odd-row {
+  background-color: rgba(156, 39, 176, 0.15);
+}
+
+.modal-container {
+  .MuiPaper-root {
+    width: 100%;
+    max-width: unset;
+
+    .search-menu-container {
+      min-height: 400px;
+
+      .k-textbox-container {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.search-menu-item-container {
+  margin-top: 15px;
+
+  .search-menu-item {
+    margin: 0 !important;
+
+    &-tabName,
+    &-subTabName {
+      max-width: 10% !important;
+      text-transform: capitalize;
+    }
+
+    .menu-item-name {
+      padding: 0 15px;
     }
   }
 }
