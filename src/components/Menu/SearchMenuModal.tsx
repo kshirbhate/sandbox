@@ -34,7 +34,7 @@ const SearchMenuModal = ({ show = false, onClose = () => {} }) => {
   ).current;
 
   return (
-    <Modal open={show} onClose={onClose} title="Search Menu">
+    <Modal open={show} onClose={onClose} title="Search Menu" className="search-menu-modal">
       <div className="search-menu-container">
         <FloatingLabel label="Enter menu name to search" editorValue={searchValue}>
           <Input onChange={onChange} />
