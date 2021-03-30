@@ -1,5 +1,10 @@
 .filter-container {
   display: flex;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
 
   .form-group {
     margin-right: 10px;
@@ -7,5 +12,9 @@
 
   .form-group:last-child {
     margin-right: 0;
+  }
+
+  .filter-more-button {
+    height: 30px;
   }
 }

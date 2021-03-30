@@ -1,5 +1,6 @@
 import React from 'react';
 import { getInputComponent } from './getInputComponent';
+import FormGroup from './FormGroup';
 import './index.scss';
 
 const FormField = (props) => {
@@ -9,7 +10,11 @@ const FormField = (props) => {
     props.onChange(e.value);
   };
 
-  return <Component {...props} onChange={onChange} onBlur={() => {}} />;
+  return (
+    <FormGroup label={props.label}>
+      <Component {...props} label="" onChange={onChange} onBlur={() => {}} />
+    </FormGroup>
+  );
 };
 
 export default FormField;

@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export const filterFields = [
   {
     name: 'fromTo',
@@ -18,4 +20,33 @@ export const filterFields = [
     name: 'supplier',
     type: 'text',
   },
+  {
+    label: 'Unit Name',
+    name: 'unit',
+    type: 'unit',
+  },
+  {
+    label: 'From Amount',
+    name: 'fromAmount',
+    type: 'number',
+  },
+  {
+    label: 'To Amount',
+    name: 'toAmount',
+    type: 'number',
+  },
 ];
+
+export const initializeFilterValues = (props) => {
+  const { initialize, filterFormName, session } = props;
+  initialize(filterFormName, {
+    fromTo: {
+      from: new Date(moment(new Date()).subtract(7, 'd').format()),
+      to: new Date(),
+    },
+    unit: {
+      value: session?.crrntCmpnyUnit?.id,
+      label: session?.crrntCmpnyUnit?.title,
+    },
+  });
+};

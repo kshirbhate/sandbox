@@ -22,3 +22,10 @@ export const updateSessionContext = (data) => (dispatch) => {
   const restClient = getAsyncRestClient(dispatch);
   restClient.$post(`/eshop/session/UpdateContext`, data, LOGIN_TYPES.UPDATE_SESSION_CONTEXT);
 };
+
+export const setActiveTab = (value) => (dispatch) => {
+  dispatch({
+    type: LOGIN_TYPES.SET_ACTIVE_TAB,
+    value,
+  });
+};

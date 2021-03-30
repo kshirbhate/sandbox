@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { CACHE_TYPES, Cache } from '../Cache/actions/types';
 import { completeAction, errorAction, startAction, getCacheData } from './utils';
-import { convertObRespose } from 'utils/fetch';
+import { convertObRespose, convertToCamelCase } from 'utils/fetch';
 import { isEmpty } from 'lodash';
 import { getAccessToken } from 'utils/localStorage';
 
@@ -147,12 +147,18 @@ export class AsyncRestClient extends BaseRestClient {
     });
   }
 
-  $delete<T>(path: string, type?: string, params?: { [key: string]: any }, transform?: (key: string, value: any) => T): void {
+  $delete<T>(
+    path: string,
+    type?: string,
+    params?: { [key: string]: any },
+    convertToObResponse: boolean = true,
+    transform?: (key: string, value: any) => T
+  ): void {
     const request = this.createRequestInit('DELETE');
-    this.fetchAsync(this.buildLink(path, params), type ? type : actionType('DELETE', path), request, transform, params);
+    this.fetchAsync(this.buildLink(path, params), type ? type : actionType('DELETE', path), request, convertToObResponse, transform, params);
   }
 
-  $get<T>(path: string, type?: string, params?: { [key: string]: any }, transform?: (key: string, value: any) => T): void {
+  $get<T>(path: string, type?: string, params?: { [key: string]: any }, convertToObResponse: boolean = true, transform?: (key: string, value: any) => T): void {
     const request = this.createRequestInit('GET');
     const requestUrl = this.buildLink(path, params);
     const requestType = type ? type : actionType('GET', path);
@@ -162,32 +168,54 @@ export class AsyncRestClient extends BaseRestClient {
         startAction(cachedData.type);
         completeAction(cachedData.type, cachedData.data, cachedData.params);
       } else {
-        this.fetchAsync(requestUrl, requestType, request, transform, params);
+        this.fetchAsync(requestUrl, requestType, request, convertToObResponse, transform, params);
       }
     } else {
-      this.fetchAsync(requestUrl, requestType, request, transform, params);
+      this.fetchAsync(requestUrl, requestType, request, convertToObResponse, transform, params);
     }
   }
 
-  $patch<T>(path: string, data: any, type?: string, params?: { [key: string]: any }, transform?: (key: string, value: any) => T): void {
+  $patch<T>(
+    path: string,
+    data: any,
+    type?: string,
+    params?: { [key: string]: any },
+    convertToObResponse: boolean = true,
+    transform?: (key: string, value: any) => T
+  ): void {
     const request = this.createRequestInit('PATCH', data);
-    this.fetchAsync(this.buildLink(path, params), type ? type : actionType('PATCH', path), request, transform, params);
+    this.fetchAsync(this.buildLink(path, params), type ? type : actionType('PATCH', path), request, convertToObResponse, transform, params);
   }
 
-  $post<T>(path: string, data: any, type?: string, params?: { [key: string]: any }, transform?: (key: string, value: any) => T) {
+  $post<T>(
+    path: string,
+    data: any,
+    type?: string,
+    params?: { [key: string]: any },
+    convertToObResponse: boolean = true,
+    transform?: (key: string, value: any) => T
+  ) {
     const request = this.createRequestInit('POST', data);
-    this.fetchAsync(this.buildLink(path, params), type ? type : actionType('POST', path), request, transform, params);
+    this.fetchAsync(this.buildLink(path, params), type ? type : actionType('POST', path), request, convertToObResponse, transform, params);
   }
 
-  $put<T>(path: string, data: any, type?: string, params?: { [key: string]: any }, transform?: (key: string, value: any) => T) {
+  $put<T>(
+    path: string,
+    data: any,
+    type?: string,
+    params?: { [key: string]: any },
+    convertToObResponse: boolean = true,
+    transform?: (key: string, value: any) => T
+  ) {
     const request = this.createRequestInit('PUT', data);
-    this.fetchAsync(this.buildLink(path, params), type ? type : actionType('PUT', path), request, transform, params);
+    this.fetchAsync(this.buildLink(path, params), type ? type : actionType('PUT', path), request, convertToObResponse, transform, params);
   }
 
   private fetchAsync<T>(
     url: string,
     type: string,
     request: RequestInit,
+    convertToObResponse?: boolean,
     transform?: (key: string, value: any) => T,
     params: { [key: string]: any } = {}
   ): void {
@@ -195,7 +223,7 @@ export class AsyncRestClient extends BaseRestClient {
 
     this.fetch(url, request, transform)
       .then((data) => {
-        const convertedResponse = convertObRespose(data);
+        const convertedResponse = convertToObResponse ? convertObRespose(data) : convertToCamelCase(data);
         completeAction(type, convertedResponse, params);
         if (process.env.REACT_APP_CACHE_DATA === 'true') {
           completeAction(

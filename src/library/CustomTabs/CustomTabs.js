@@ -13,6 +13,7 @@ import Icon from '@material-ui/core/Icon';
 import Card from 'library/Card/Card.js';
 import CardBody from 'library/Card/CardBody.js';
 import CardHeader from 'library/Card/CardHeader.js';
+import { isNil } from 'lodash';
 
 import styles from 'assets/jss/material-kit-react/components/customTabsStyle';
 
@@ -21,8 +22,15 @@ const useStyles = makeStyles(styles);
 export default function CustomTabs(props) {
   const [value, setValue] = React.useState(0);
 
+  React.useEffect(() => {
+    if (!isNil(props.active)) {
+      setValue(props.active);
+    }
+  }, [props.active]);
+
   const handleChange = (event, value) => {
     setValue(value);
+    props.setActive && props.setActive(value);
   };
   const classes = useStyles();
   const { headerColor, plainTabs, tabs, title, rtlActive } = props;
@@ -89,4 +97,6 @@ CustomTabs.propTypes = {
   ),
   rtlActive: PropTypes.bool,
   plainTabs: PropTypes.bool,
+  active: PropTypes.number,
+  setActive: PropTypes.func,
 };

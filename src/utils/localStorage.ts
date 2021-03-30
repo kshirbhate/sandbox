@@ -2,6 +2,7 @@ import { isNil } from 'lodash';
 
 const ACCESS_TOKEN = 'accessToken';
 const SESSION_DETAILS = 'sessionDetails';
+const ACTIVE_TAB = 'activeTab';
 
 export const setAccessToken = (token) => {
   window.localStorage.setItem(ACCESS_TOKEN, token);
@@ -33,4 +34,13 @@ export const getSessionDetails = () => {
 export const removeSession = () => {
   window.localStorage.removeItem(SESSION_DETAILS);
   window.localStorage.removeItem(ACCESS_TOKEN);
+  window.localStorage.removeItem(ACTIVE_TAB);
+};
+
+export const setActiveTab = (tab) => {
+  window.localStorage.setItem(ACTIVE_TAB, tab);
+};
+
+export const getActiveTab = () => {
+  return Number(window.localStorage.getItem(ACTIVE_TAB));
 };

@@ -16,6 +16,7 @@ import Success from './Typography/Success';
 import Warning from './Typography/Warning';
 import Loader from './Loader';
 import ComboSelect from './Select/ComboSelect';
+import UnitSelect from './Select/UnitSelect';
 import CustomDropdown from './CustomDropdown/CustomDropdown';
 import CustomTabs from './CustomTabs/CustomTabs';
 import GridContainer from './Grid/GridContainer';
@@ -23,6 +24,7 @@ import GridItem from './Grid/GridItem';
 import Modal from './Modal';
 import ButtonToolbar from './ButtonToolbar';
 import FromToDatePicker from './Input/FromToDatePicker';
+import DataGrid from './DataGrid';
 
 export {
   FormField,
@@ -43,6 +45,7 @@ export {
   Warning,
   Loader,
   ComboSelect,
+  UnitSelect,
   CustomDropdown,
   CustomTabs,
   GridContainer,
@@ -50,4 +53,5 @@ export {
   Modal,
   ButtonToolbar,
   FromToDatePicker,
+  DataGrid,
 };

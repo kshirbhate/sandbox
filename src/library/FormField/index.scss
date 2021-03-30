@@ -1,11 +1,16 @@
 .form-group {
+  .k-textbox,
   .k-textbox-container {
+    width: 100%;
+    padding-top: 0;
+  }
+
+  .k-widget {
     width: 100%;
   }
 }
 
 .form-group-field {
   &-label {
-    margin-bottom: 5px;
   }
 }

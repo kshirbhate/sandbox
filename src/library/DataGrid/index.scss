@@ -1,0 +1,38 @@
+.k-grid {
+  font-size: 11px;
+
+  .k-grid-header {
+    font-size: 11px;
+
+    .k-grid-header-wrap {
+      table {
+        width: 100% !important;
+
+        th {
+          padding: 8px;
+        }
+
+        .k-header {
+          .k-link {
+            padding: 0;
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .k-grid-container {
+    .k-grid-content {
+      .k-grid-table {
+        width: 100% !important;
+
+        tbody {
+          td {
+            padding: 8px;
+          }
+        }
+      }
+    }
+  }
+}
