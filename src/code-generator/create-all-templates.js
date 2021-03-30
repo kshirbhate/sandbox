@@ -6,8 +6,8 @@ const _ = require('lodash');
 const { createTemplate, getAllDirectories, getAllPlaceholderNames } = require('./generator-utilities');
 
 function createAllTemplates(name, directory) {
-  const directories = getAllDirectories(name, directory);
   const placeholderNames = getAllPlaceholderNames(name);
+  const directories = getAllDirectories(name, directory, placeholderNames);
 
   _.forEach(directories, (directory, key) => {
     createTemplate(directory, placeholderNames, () => {

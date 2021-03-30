@@ -15,27 +15,50 @@ const PRETTIER_CONFIG = {
   printWidth: 100,
 };
 
-function getAllDirectories(name, directory) {
-  return getReactComponentDirs(name, directory);
+function getAllDirectories(name, directory, placeholderNames) {
+  return getReactComponentDirs(name, directory, placeholderNames);
 }
 
-function getReactComponentDirs(name, directory) {
-  const templateDirectory = path.join(__dirname, './', 'templates');
-  const generatedDirectory = path.join(ROOT_PATH, directory, name);
+function getReactComponentDirs(name, directory, placeholderNames) {
+  const templateDirectory = path.join(__dirname, './', 'templates', 'ListAndEntity');
+  const generatedDirectory = path.join(ROOT_PATH, directory, placeholderNames.upperCamel);
+  const actionsDirectory = path.join(ROOT_PATH, directory, placeholderNames.upperCamel, 'actions');
+  const entityDirectory = path.join(ROOT_PATH, directory, placeholderNames.upperCamel, 'Entity');
+  const listDirectory = path.join(ROOT_PATH, directory, placeholderNames.upperCamel, 'List');
+  const reducerDirectory = path.join(ROOT_PATH, directory, placeholderNames.upperCamel, 'reducer');
 
   if (!fs.existsSync(generatedDirectory)) {
-    shell.mkdir('-p', path.join(generatedDirectory, 'test'));
+    shell.mkdir('-p', actionsDirectory);
+    shell.mkdir('-p', entityDirectory);
+    shell.mkdir('-p', listDirectory);
+    shell.mkdir('-p', reducerDirectory);
   }
 
   const reactDirs = {
-    view: {
-      template: path.join(templateDirectory, 'template.view.js'),
-      generated: path.join(generatedDirectory, `${name}.view.js`),
+    types: {
+      template: path.join(templateDirectory, 'types.ts'),
+      generated: path.join(generatedDirectory, 'types.ts'),
     },
-    // stylesheet: {
-    //   template: path.join(templateDirectory, '_template.styles.scss'),
-    //   generated: path.join(generatedDirectory, `_${name}.styles.scss`),
-    // },
+    actions: {
+      template: path.join(templateDirectory, 'actions', 'index.ts'),
+      generated: path.join(actionsDirectory, 'index.ts'),
+    },
+    listFields: {
+      template: path.join(templateDirectory, 'List', 'fields.ts'),
+      generated: path.join(listDirectory, 'fields.ts'),
+    },
+    listIndex: {
+      template: path.join(templateDirectory, 'List', 'index.ts'),
+      generated: path.join(listDirectory, 'index.ts'),
+    },
+    listList: {
+      template: path.join(templateDirectory, 'List', 'List.tsx'),
+      generated: path.join(listDirectory, 'List.tsx'),
+    },
+    reducer: {
+      template: path.join(templateDirectory, 'reducer', 'reducer.ts'),
+      generated: path.join(reducerDirectory, `${placeholderNames.lowerCamel}.ts`),
+    },
   };
 
   return reactDirs;
@@ -44,15 +67,16 @@ function getReactComponentDirs(name, directory) {
 function getAllPlaceholderNames(name) {
   const lowerCamel = _.camelCase(name);
   const upperCamel = _.upperFirst(lowerCamel);
-  return { name, lowerCamel, upperCamel };
+  const capitalCase = _.replace(_.upperCase(lowerCamel), ' ', '_');
+  return { name, lowerCamel, upperCamel, capitalCase };
 }
 
 function createTemplate(directory, placeholderNames, callback) {
   fs.readFile(directory.template, 'utf8', (err, data) => {
     if (err) throw err;
 
-    data = _.replace(data, /TEMPLATE_KEBAB_CASE_NAME/g, placeholderNames.name);
-    data = _.replace(data, /TEMPLATE_LOWER_CAMEL_CASE_NAME/g, placeholderNames.lowerCamel);
+    data = _.replace(data, /FEATURE_NAME_CAPITAL/g, placeholderNames.capitalCase);
+    data = _.replace(data, /FEATURE_NAME_UPPER_CAMEL/g, placeholderNames.upperCamel);
     data = _.replace(data, /TEMPLATE_UPPER_CAMEL_CASE_NAME/g, placeholderNames.upperCamel);
 
     const formattedCode = formatCodeWithPrettier(data, directory);
