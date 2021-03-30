@@ -5,7 +5,13 @@ import { getFormValues, initialize } from 'redux-form';
 import { FILTER_FORM } from 'constants/formNames';
 import List from './List';
 import { IRootState } from 'reducers';
-import { getFEATURE_NAME_UPPER_CAMELList } from '../actions';
+import {
+  getFEATURE_NAME_UPPER_CAMEL,
+  getFEATURE_NAME_UPPER_CAMELList,
+  addFEATURE_NAME_UPPER_CAMEL,
+  updateFEATURE_NAME_UPPER_CAMEL,
+  deleteFEATURE_NAME_UPPER_CAMEL,
+} from '../actions';
 
 const mapStateToProps = (state: IRootState) => {
   const filterData: any = getFormValues(FILTER_FORM)(state);
@@ -22,7 +28,11 @@ const mapDispatchToProps = (dispatch: any) =>
   bindActionCreators(
     {
       initialize,
+      getFEATURE_NAME_UPPER_CAMEL,
       getFEATURE_NAME_UPPER_CAMELList,
+      addFEATURE_NAME_UPPER_CAMEL,
+      updateFEATURE_NAME_UPPER_CAMEL,
+      deleteFEATURE_NAME_UPPER_CAMEL,
     },
     dispatch
   );
