@@ -10,9 +10,10 @@ const _ = require('lodash');
 const NODE_MODULES_PATH = 'node_modules';
 const ROOT_PATH = getRootPath();
 const PRETTIER_CONFIG = {
-  tabWidth: 4,
+  semi: true,
   singleQuote: true,
-  printWidth: 100,
+  printWidth: 160,
+  tabWidth: 2,
 };
 
 function getAllDirectories(name, directory, placeholderNames) {
@@ -71,13 +72,14 @@ function getAllPlaceholderNames(name) {
   return { name, lowerCamel, upperCamel, capitalCase };
 }
 
-function createTemplate(directory, placeholderNames, callback) {
+function createTemplate(directory, placeholderNames, api, callback) {
   fs.readFile(directory.template, 'utf8', (err, data) => {
     if (err) throw err;
 
     data = _.replace(data, /FEATURE_NAME_CAPITAL/g, placeholderNames.capitalCase);
     data = _.replace(data, /FEATURE_NAME_UPPER_CAMEL/g, placeholderNames.upperCamel);
-    data = _.replace(data, /TEMPLATE_UPPER_CAMEL_CASE_NAME/g, placeholderNames.upperCamel);
+    data = _.replace(data, /FEATURE_NAME_LOWER_CAMEL/g, placeholderNames.lowerCamel);
+    data = _.replace(data, /API_URL/g, `/${api}`);
 
     const formattedCode = formatCodeWithPrettier(data, directory);
 

@@ -19,8 +19,8 @@ const mapStateToProps = (state: IRootState) => {
     filterData: filterData,
     filterFormName: FILTER_FORM,
     session: state.session.session,
-    loading: state.purchaseInvoiceGst.loading,
-    list: state.purchaseInvoiceGst.list,
+    loading: state.FEATURE_NAME_LOWER_CAMEL.loading,
+    list: state.FEATURE_NAME_LOWER_CAMEL.list,
   };
 };
 
